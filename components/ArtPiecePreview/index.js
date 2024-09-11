@@ -8,7 +8,13 @@ export default function ArtPiecePreview({ image, title, artist }) {
     <div>
       {/* Verwende die Image-Komponente von Next.js, um das Bild des Kunststücks darzustellen.
           Die Größe des Bildes ist hier auf 200x200 Pixel festgelegt. */}
-      <Image src={image} alt={title} width={200} height={200} priority />
+      <Image
+        src={image}
+        alt={`Art piece "${title}" by ${artist}`}
+        width={200}
+        height={200}
+        priority
+      />
       {/* Zeige den Titel des Kunststücks */}
       <h2>{title}</h2>
       {/* Zeige den Namen des Künstlers */}
