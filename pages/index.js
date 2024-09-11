@@ -1,6 +1,7 @@
 // Importiere useSWR für das Abrufen und Zwischenspeichern von Daten sowie die ArtPieces-Komponente, die die Kunststücke rendern wird.
 import useSWR from "swr";
 import ArtPieces from "/components/ArtPieces";
+import Spotlight from "/components/Spotlight";
 
 // Definiere eine fetcher-Funktion, die die API aufruft, um die Daten zu laden.
 // Die fetcher-Funktion wird an useSWR übergeben, um den Abruf zu verwalten.
@@ -38,12 +39,26 @@ export default function HomePage() {
   // Solange die Daten nicht geladen sind, zeige eine Ladeanzeige an.
   if (!data) return <h1>Loading ...</h1>;
 
+  // Funktion zum Auswählen eines zufälligen Kunstwerks
+  function getRandomPiece(data) {
+    const randomIndex = Math.floor(Math.random() * data.length);
+    return data[randomIndex]; // Gibt das zufällig ausgewählte Kunstwerk zurück
+  }
+
+  // Wähle ein zufälliges Kunstwerk für das Spotlight aus
+  const spotlightPiece = getRandomPiece(data);
+
   // Sobald die Daten geladen sind, zeige den Titel und die ArtPieces-Komponente an, die die Kunststücke als Liste rendert.
   return (
     <div>
       <h1>Art Gallery</h1> {/* Titel der Seite */}
-      <ArtPieces pieces={data} />{" "}
-      {/* Übergib die geladenen Kunststücke als props an ArtPieces */}
+      {/* Rendern der Liste aller Kunstwerke */}
+      <ArtPieces pieces={data} />
+      {/* Rendern des Spotlight-Kunstwerks */}
+      <Spotlight
+        image={spotlightPiece.imageSource} // Übergibt das Bild des zufälligen Kunstwerks
+        artist={spotlightPiece.artist} // Übergibt den Künstler des zufälligen Kunstwerks
+      />
     </div>
   );
 }
