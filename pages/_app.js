@@ -1,6 +1,7 @@
 import useSWR from "swr";
 import GlobalStyle from "../styles";
 import Layout from "/components/Layout";
+import { useImmer } from "use-immer";
 
 // Definiere eine fetcher-Funktion, die die API aufruft, um die Daten zu laden.
 // Die fetcher-Funktion wird an useSWR übergeben, um den Abruf zu verwalten.
@@ -31,6 +32,19 @@ export default function App({ Component, pageProps }) {
     fetcher // fetcher-Funktion, die wir zuvor definiert haben.
   );
 
+  const [artPiecesInfo, updateArtPiecesInfo] = useImmer([]);
+
+  function handleToggleFavorite(slug) {
+    updateArtPiecesInfo((draft) => {
+      const currentArtPiece = draft.find((piece) => piece.slug === slug);
+      if (currentArtPiece) {
+        currentArtPiece.isFavorite = !currentArtPiece.isFavorite;
+      } else {
+        draft.push({ slug, isFavorite: true });
+      }
+    });
+  }
+
   // Wenn ein Fehler auftritt, gib eine Fehlermeldung auf der Seite aus.
   if (error) return <h1>{error.message}</h1>;
 
@@ -41,7 +55,12 @@ export default function App({ Component, pageProps }) {
       <GlobalStyle />
       {/* Layout-Komponente umschließt den Hauptinhalt */}
       <Layout>
-        <Component {...pageProps} data={data} />
+        <Component
+          {...pageProps}
+          data={data}
+          artPiecesInfo={artPiecesInfo}
+          onToggleFavorite={handleToggleFavorite}
+        />
       </Layout>
     </>
   );
