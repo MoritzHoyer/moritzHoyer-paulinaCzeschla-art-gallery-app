@@ -1,12 +1,24 @@
 // Importiere die Next.js's Image-Komponente, um optimierte Bilder darzustellen.
 import Image from "next/image";
 import Link from "next/link";
+import FavoriteButton from "../FavoriteButton";
 
 // ArtPiecePreview-Komponente: Diese Komponente zeigt ein einzelnes Kunststück an.
 // Es nimmt die 'image', 'title', und 'artist'-Props, die von der ArtPieces-Komponente übergeben wurden.
-export default function ArtPiecePreview({ image, title, artist, slug }) {
+export default function ArtPiecePreview({
+  image,
+  title,
+  artist,
+  slug,
+  isFavorite,
+  onToggleFavorite,
+}) {
   return (
     <div>
+      <FavoriteButton
+        isFavorite={isFavorite}
+        onToggleFavorite={onToggleFavorite}
+      />
       {/* Verwende die Image-Komponente von Next.js, um das Bild des Kunststücks darzustellen.
           Die Größe des Bildes ist hier auf 200x200 Pixel festgelegt. */}
       {/* Verwende Link, um zur Detailseite des Kunstwerks zu navigieren */}

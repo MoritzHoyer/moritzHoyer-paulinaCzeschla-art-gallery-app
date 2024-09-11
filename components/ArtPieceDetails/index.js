@@ -1,4 +1,5 @@
 import Image from "next/image";
+import FavoriteButton from "../FavoriteButton";
 
 export default function ArtPieceDetails({
   image,
@@ -7,10 +8,16 @@ export default function ArtPieceDetails({
   year,
   genre,
   onBack,
+  isFavorite,
+  onToggleFavorite,
 }) {
   return (
     <>
       <button onClick={onBack}>Back</button>
+      <FavoriteButton
+        isFavorite={isFavorite}
+        onToggleFavorite={onToggleFavorite}
+      />
       <Image
         src={image}
         alt={`Art piece "${title}" by ${artist}`}
