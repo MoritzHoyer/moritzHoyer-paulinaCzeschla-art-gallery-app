@@ -4,8 +4,6 @@ import ArtPiecePreview from "../ArtPiecePreview";
 // ArtPieces-Komponente: Diese Komponente rendert eine Liste von Kunststücken.
 // Die 'pieces'-Prop enthält die Daten der Kunststücke, die von der HomePage-Komponente übergeben wurde.
 export default function ArtPieces({ pieces }) {
-  console.log("pieces: ", pieces); // Debugging: Zeige die empfangenen Kunststücke in der Konsole an.
-
   // Gib eine Liste von Kunststücken zurück. Jedes Kunststück wird mit der map-Funktion über die pieces-Array gerendert.
   return (
     <ul>
@@ -17,6 +15,7 @@ export default function ArtPieces({ pieces }) {
             image={piece.imageSource} // Bildquelle des Kunststücks
             artist={piece.artist} // Name des Künstlers
             title={piece.name} // Titel des Kunststücks
+            slug={piece.slug} // Hier übergeben wir den slug
           />
         </li>
       ))}
