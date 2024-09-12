@@ -1,19 +1,20 @@
 import ArtPieceDetails from "/components/ArtPieceDetails";
 import { useRouter } from "next/router";
 
-export default function ArtPieceDetailsPage({ data }) {
+export default function ArtPieceDetailsPage({ data, handleToggleFavorite }) {
   const router = useRouter();
   const { slug } = router.query;
 
   const artPiece = data.find((data) => data.slug === slug);
 
-  if (!artPiece) {
-    return <p>Art piece not found</p>;
-  }
+  if (!artPiece) return <h2>Art Piece not found</h2>;
 
   function handleBack() {
     router.push("/art-pieces");
   }
+
+  // console.log(handleToggleFavorite);
+  // korrekt!!
 
   return (
     <ArtPieceDetails
@@ -23,6 +24,7 @@ export default function ArtPieceDetailsPage({ data }) {
       year={artPiece.year}
       genre={artPiece.genre}
       onBack={handleBack}
+      handleToggleFavorite={handleToggleFavorite}
     />
   );
 }

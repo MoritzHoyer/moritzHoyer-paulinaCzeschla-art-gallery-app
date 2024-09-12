@@ -5,9 +5,12 @@ export default function SpotlightPage({
   artPiecesInfo,
   handleToggleFavorite,
 }) {
+  // console.log(handleToggleFavorite);
+  // korrekt!
+
   return (
     <>
-      <h2>Spotlight</h2>
+      <h1>Art Gallery</h1>
       <Spotlight
         pieces={data}
         artPiecesInfo={artPiecesInfo}

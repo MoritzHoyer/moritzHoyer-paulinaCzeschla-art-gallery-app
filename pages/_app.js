@@ -50,6 +50,12 @@ export default function App({ Component, pageProps }) {
 
   if (!data) return <h1>Loading ...</h1>;
 
+  // console.log(handleToggleFavorite);
+  // korrekt!
+
+  // console.log("auf App() DATA:, ", data);
+  // korrekt!
+
   return (
     <>
       <GlobalStyle />

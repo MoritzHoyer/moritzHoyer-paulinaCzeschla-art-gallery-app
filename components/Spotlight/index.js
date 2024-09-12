@@ -2,19 +2,26 @@ import Image from "next/image";
 import FavoriteButton from "../FavoriteButton/index.js";
 import { useEffect, useState } from "react";
 
+// *****************************************************************
+
 function getRandomPiece(data) {
   const randomPiece = data[Math.floor(Math.random() * data.length)];
 
   return randomPiece;
 }
 
+// *****************************************************************
+
 export default function Spotlight({
   pieces,
   artPiecesInfo,
   handleToggleFavorite,
 }) {
-  const [spotlightPiece, setSpotlightPiece] = useState(null);
+  // state, der das random piece speichert
+  const [spotlightPiece, setSpotlightPiece] = useState();
 
+  // getRandomPiece whält aus "pieces" ein random piece aus & speichert es im state "spotlightPiece"
+  // useEffect macht, dass ein random piece ausgewählt wird, sobald die Daten in pieces geladen oder aktualisiert werden
   useEffect(() => {
     if (pieces && pieces.length > 0) {
       setSpotlightPiece(getRandomPiece(pieces));
@@ -27,15 +34,19 @@ export default function Spotlight({
     (pieceInfo) => pieceInfo.slug === spotlightPiece.slug
   )?.isFavorite;
 
+  // console.log("Komponente Spotlight(): ", handleToggleFavorite);
+  // korrekt!!
+
   return (
     <>
+      <h2>Spotlight</h2>
       <FavoriteButton
         isFavorite={isFavorite}
-        onToggleFavorite={() => handleToggleFavorite(spotlightPiece.slug)}
+        handleToggleFavorite={() => handleToggleFavorite(spotlightPiece.slug)}
       />
       <Image
         src={spotlightPiece.imageSource}
-        alt={`"${spotlightPiece.name}" by ${spotlightPiece.artist}`}
+        alt={`Art piece "${spotlightPiece.name}" by ${spotlightPiece.artist}`}
         width={400}
         height={400}
         priority

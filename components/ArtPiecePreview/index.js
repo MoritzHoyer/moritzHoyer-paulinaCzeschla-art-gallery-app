@@ -3,18 +3,24 @@ import Link from "next/link";
 import FavoriteButton from "../FavoriteButton";
 
 export default function ArtPiecePreview({
-  image,
-  title,
-  artist,
   slug,
+  image,
+  artist,
+  title,
   isFavorite,
-  onToggleFavorite,
+  handleToggleFavorite,
 }) {
+  // console.log(handleToggleFavorite);
+  // korrekt!
+
+  // console.log("auf ArtPiecePreview() PIECES: ", slug, image, artist, title);
+  // korrekt!
+
   return (
     <div>
       <FavoriteButton
         isFavorite={isFavorite}
-        onToggleFavorite={onToggleFavorite}
+        handleToggleFavorite={() => handleToggleFavorite(slug)}
       />
 
       <Link href={`/art-pieces/${slug}`}>
@@ -25,8 +31,8 @@ export default function ArtPiecePreview({
           height={200}
         />
       </Link>
-      <h2>{title}</h2>
-      <p>{artist}</p>
+      <h3>{title}</h3>
+      <p>by {artist}</p>
     </div>
   );
 }
