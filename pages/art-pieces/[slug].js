@@ -9,7 +9,6 @@ export default function ArtPieceDetailsPage({ data }) {
 
   if (!artPiece) {
     return <p>Art piece not found</p>;
-    // {setTimeout(() => router.push("/art-pieces"), 3000)}
   }
 
   function handleBack() {
