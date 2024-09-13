@@ -2,6 +2,7 @@ import useSWR from "swr";
 import GlobalStyle from "../styles";
 import Layout from "/components/Layout";
 import { useImmer } from "use-immer";
+import { format } from "date-fns";
 
 // *********************************************************************
 
@@ -46,6 +47,37 @@ export default function App({ Component, pageProps }) {
     });
   }
 
+  // ***************************************
+
+  const [comments, setComments] = useImmer([]);
+
+  // console.log("COMMENTS!", comments);
+  // korrekt!!
+
+  const handleSubmitComment = (slug, commentText) => {
+    // console.log("SLUG??", slug);
+    // console.log("COMMENT??", commentText);
+    // korrekt!
+
+    setComments((draft) => {
+      const newComment = {
+        text: commentText,
+        date: format(new Date(), "yyyy-MM-dd HH:mm:ss"),
+        slug,
+      };
+
+      draft.push(newComment);
+    });
+  };
+
+  // console.log("KOMMT ES HIER AN?", artPiecesInfo);
+  // FEHLER!
+
+  // console.log("handleSubmitComment", handleSubmitComment);
+  // korrekt!
+
+  // ***************************************
+
   if (error) return <h1>{error.message}</h1>;
 
   if (!data) return <h1>Loading ...</h1>;
@@ -65,6 +97,8 @@ export default function App({ Component, pageProps }) {
           data={data}
           artPiecesInfo={artPiecesInfo}
           handleToggleFavorite={handleToggleFavorite}
+          onSubmitComment={handleSubmitComment}
+          comments={comments}
         />
       </Layout>
     </>

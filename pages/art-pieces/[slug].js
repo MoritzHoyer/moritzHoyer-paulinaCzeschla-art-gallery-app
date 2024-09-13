@@ -5,6 +5,8 @@ export default function ArtPieceDetailsPage({
   data,
   handleToggleFavorite,
   artPiecesInfo,
+  onSubmitComment,
+  comments,
 }) {
   const router = useRouter();
   const { slug } = router.query;
@@ -33,6 +35,9 @@ export default function ArtPieceDetailsPage({
   // console.log("auf ArtPieceDetailsPage() DATA: ", data);
   // korrekt!!
 
+  // console.log("COMMENTS!!:", comments);
+  // korrekt!!
+
   return (
     <ArtPieceDetails
       image={artPiece.imageSource}
@@ -43,6 +48,9 @@ export default function ArtPieceDetailsPage({
       onBack={handleBack}
       handleToggleFavorite={() => handleToggleFavorite(slug)}
       isFavorite={isFavorite}
+      onSubmitComment={(comment) => onSubmitComment(slug, comment)}
+      comments={comments}
+      slug={slug}
     />
   );
 }
