@@ -1,8 +1,9 @@
 import useSWR from "swr";
 import GlobalStyle from "../styles";
 import Layout from "/components/Layout";
-import { useImmer } from "use-immer";
+// import { useImmer } from "use-immer";
 import { format } from "date-fns";
+import { useImmerLocalStorageState } from "../lib/hook/useImmerLocalStorageState";
 
 // *********************************************************************
 
@@ -29,7 +30,13 @@ export default function App({ Component, pageProps }) {
     fetcher
   );
 
-  const [artPiecesInfo, updateArtPiecesInfo] = useImmer([]);
+  // const [artPiecesInfo, updateArtPiecesInfo] = useImmer([]);
+  const [artPiecesInfo, updateArtPiecesInfo] = useImmerLocalStorageState(
+    "art-pieces-info",
+    {
+      defaultValue: [],
+    }
+  );
 
   function handleToggleFavorite(slug) {
     console.log("fav button clicked");
@@ -49,7 +56,13 @@ export default function App({ Component, pageProps }) {
 
   // ***************************************
 
-  const [comments, setComments] = useImmer([]);
+  // const [comments, setComments] = useImmer([]);
+  const [comments, setComments] = useImmerLocalStorageState(
+    "art-piece-comments",
+    {
+      defaultValue: [],
+    }
+  );
 
   // console.log("COMMENTS!", comments);
   // korrekt!!
