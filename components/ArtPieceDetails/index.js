@@ -2,6 +2,7 @@ import Image from "next/image";
 import FavoriteButton from "../FavoriteButton";
 import Comments from "../Comments";
 import CommentForm from "../CommentForm";
+import styled from "styled-components";
 
 export default function ArtPieceDetails({
   image,
@@ -15,6 +16,7 @@ export default function ArtPieceDetails({
   comments,
   onSubmitComment,
   slug,
+  colors,
 }) {
   // console.log(handleToggleFavorite);
   // korrekt!!
@@ -28,6 +30,8 @@ export default function ArtPieceDetails({
   // console.log("auf ArtPieceDetails() FUNKTION:", onSubmitComment);
   // korrekt!
   const foundComments = comments.filter((comment) => comment.slug === slug);
+
+  console.log("colers", colors);
 
   return (
     <>
@@ -44,6 +48,12 @@ export default function ArtPieceDetails({
         priority
       />
 
+      <ColorPalette>
+        {colors.map((color, index) => (
+          <Colors key={index} color={color}></Colors>
+        ))}
+      </ColorPalette>
+
       <h3>{title}</h3>
       <p>by {artist}</p>
       <p>Year: {year}</p>
@@ -54,3 +64,28 @@ export default function ArtPieceDetails({
     </>
   );
 }
+
+const Colors = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: ${(props) => props.color};
+  margin: 5px;
+`;
+
+const ColorPalette = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+// list-style-type: ${(props) => (props.$isOnFire ? "🔥" : "❄️")};
+
+// export default function List() {
+//   return (
+//     <StyledList $isOnFire>
+//       <li>Item 1</li>
+//       <li>Item 2</li>
+//       <li>Item 3</li>
+//     </StyledList>
+//   );
+// }
