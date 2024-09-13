@@ -1,14 +1,9 @@
+import styled from "styled-components";
 import ArtPiecePreview from "../ArtPiecePreview";
 
 export default function ArtPieces({ pieces, handleToggleFavorite }) {
-  // console.log(handleToggleFavorite);
-  // korrekt!
-
-  // console.log("auf ArtPieces() >pieces< : ", pieces);
-  // korrekt!
-
   return (
-    <ul>
+    <StyledList>
       {pieces.map((piece) => (
         <li key={piece.slug}>
           <ArtPiecePreview
@@ -18,9 +13,17 @@ export default function ArtPieces({ pieces, handleToggleFavorite }) {
             title={piece.name}
             isFavorite={piece.isFavorite}
             handleToggleFavorite={handleToggleFavorite}
+            dimensions={piece.dimensions}
           />
         </li>
       ))}
-    </ul>
+    </StyledList>
   );
 }
+
+const StyledList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+`;

@@ -77,15 +77,3 @@ const ColorPalette = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
-
-// list-style-type: ${(props) => (props.$isOnFire ? "🔥" : "❄️")};
-
-// export default function List() {
-//   return (
-//     <StyledList $isOnFire>
-//       <li>Item 1</li>
-//       <li>Item 2</li>
-//       <li>Item 3</li>
-//     </StyledList>
-//   );
-// }

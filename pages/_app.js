@@ -62,10 +62,6 @@ export default function App({ Component, pageProps }) {
   );
 
   const handleSubmitComment = (slug, commentText) => {
-    // console.log("SLUG??", slug);
-    // console.log("COMMENT??", commentText);
-    // korrekt!
-
     setComments((draft) => {
       const newComment = {
         text: commentText,
@@ -77,28 +73,17 @@ export default function App({ Component, pageProps }) {
     });
   };
 
-  // console.log("KOMMT ES HIER AN?", artPiecesInfo);
-  // FEHLER!
-
-  // console.log("handleSubmitComment", handleSubmitComment);
-  // korrekt!
-
   // ***************************************
 
   if (error) return <h1>{error.message}</h1>;
 
   if (!data) return <h1>Loading ...</h1>;
 
-  // console.log(handleToggleFavorite);
-  // korrekt!
-
-  // console.log("auf App() DATA:, ", data);
-  // korrekt!
-
   return (
     <>
       <GlobalStyle />
       <Layout>
+        <h1>Art Gallery</h1>
         <Component
           {...pageProps}
           data={data}

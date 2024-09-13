@@ -1,7 +1,4 @@
 export default function Comments({ comments }) {
-  // console.log("COMMENTS: ", comments);
-  // korrekt!
-
   if (!comments) return <h2>FEHLER</h2>;
 
   return (
