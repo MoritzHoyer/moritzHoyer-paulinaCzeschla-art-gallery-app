@@ -6,7 +6,7 @@ export default function Comments({ comments }) {
 
   return (
     <>
-      <h3>Comments</h3>
+      <h2>Comments</h2>
       {comments.length > 0 ? (
         <ul>
           {comments.map((comment, index) => (
