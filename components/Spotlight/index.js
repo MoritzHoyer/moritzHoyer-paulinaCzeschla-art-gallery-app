@@ -1,6 +1,7 @@
 import Image from "next/image";
 import FavoriteButton from "../FavoriteButton/index.js";
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 
 // *****************************************************************
 
@@ -34,24 +35,79 @@ export default function Spotlight({
     (pieceInfo) => pieceInfo.slug === spotlightPiece.slug
   )?.isFavorite;
 
-  // console.log("Komponente Spotlight(): ", handleToggleFavorite);
-  // korrekt!!
-
   return (
-    <>
-      <h2>Spotlight</h2>
-      <FavoriteButton
-        isFavorite={isFavorite}
-        handleToggleFavorite={() => handleToggleFavorite(spotlightPiece.slug)}
-      />
-      <Image
-        src={spotlightPiece.imageSource}
-        alt={`Art piece "${spotlightPiece.name}" by ${spotlightPiece.artist}`}
-        width={400}
-        height={400}
-        priority
-      />
-      <p>{spotlightPiece.artist}</p>
-    </>
+    <SpotlightWrapper>
+      <SpotlightTitle>Spotlight</SpotlightTitle>
+
+      <SpotlightImageContainer>
+        <Image
+          src={spotlightPiece.imageSource}
+          alt={`Art piece "${spotlightPiece.name}" by ${spotlightPiece.artist}`}
+          width={500}
+          height={500}
+          priority
+        />
+      </SpotlightImageContainer>
+
+      <SpotlightDetailsContainer>
+        <SpotlightArtist>{spotlightPiece.artist}</SpotlightArtist>
+
+        <FavoriteButtonContainer>
+          <FavoriteButton
+            isFavorite={isFavorite}
+            handleToggleFavorite={() =>
+              handleToggleFavorite(spotlightPiece.slug)
+            }
+          />
+        </FavoriteButtonContainer>
+      </SpotlightDetailsContainer>
+    </SpotlightWrapper>
   );
 }
+
+// const Container = styled.div`
+//   display: flex;
+// `;
+
+const SpotlightWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 20px; // Abstand zwischen den Elementen
+`;
+
+const SpotlightTitle = styled.h1`
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+`;
+
+const SpotlightImageContainer = styled.div`
+  width: 300px;
+  height: 300px;
+  background-color: #e0e0e0; // Platzhalter für das Bild
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const SpotlightDetailsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  align-items: center;
+  margin-top: 10px;
+`;
+
+const SpotlightArtist = styled.p`
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+`;
+
+const FavoriteButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;

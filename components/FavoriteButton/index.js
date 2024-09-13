@@ -6,11 +6,6 @@ export default function FavoriteButton({ isFavorite, handleToggleFavorite }) {
   // soll ca. so verwendet werden:
   // src={isFavorite ? "/assets/heart-filled.svg" : "/assets/heart.svg"}
 
-  // console.log(handleToggleFavorite);
-  // UNDEFINED! (gewesen)
-
-  // console.log("YOOOOOOOOO");
-
   return (
     <button type="button" onClick={handleToggleFavorite}>
       <Image src="/assets/heart.svg" width={40} height={40} alt="" />

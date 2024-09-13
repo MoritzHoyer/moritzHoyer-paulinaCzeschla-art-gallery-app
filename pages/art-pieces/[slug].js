@@ -29,15 +29,6 @@ export default function ArtPieceDetailsPage({
     router.push("/art-pieces");
   }
 
-  // console.log(handleToggleFavorite);
-  // korrekt!!
-
-  // console.log("auf ArtPieceDetailsPage() DATA: ", data);
-  // korrekt!!
-
-  // console.log("COMMENTS!!:", comments);
-  // korrekt!!
-
   return (
     <ArtPieceDetails
       image={artPiece.imageSource}
