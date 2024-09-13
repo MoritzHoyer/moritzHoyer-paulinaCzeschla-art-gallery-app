@@ -10,7 +10,7 @@ export default function FavoritesPage({
     artPiecesInfo.find((piece) => piece.slug === slug && piece.isFavorite)
   );
 
-  // console.log("auf FavoritesPage() DATA: ", data);
+  console.log("auf FavoritesPage() DATA: ", data);
   // korrekt!!
 
   return (

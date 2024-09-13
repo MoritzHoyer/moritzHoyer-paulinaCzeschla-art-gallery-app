@@ -14,6 +14,9 @@ export default function ArtPieceDetails({
   // console.log(handleToggleFavorite);
   // korrekt!!
 
+  // console.log("auf ArtPieceDetails() DATA: ", image);
+  // korrekt!!
+
   return (
     <>
       <button onClick={onBack}>Back</button>

@@ -1,7 +1,11 @@
 import ArtPieceDetails from "/components/ArtPieceDetails";
 import { useRouter } from "next/router";
 
-export default function ArtPieceDetailsPage({ data, handleToggleFavorite }) {
+export default function ArtPieceDetailsPage({
+  data,
+  handleToggleFavorite,
+  artPiecesInfo,
+}) {
   const router = useRouter();
   const { slug } = router.query;
 
@@ -9,11 +13,24 @@ export default function ArtPieceDetailsPage({ data, handleToggleFavorite }) {
 
   if (!artPiece) return <h2>Art Piece not found</h2>;
 
+  // *************************
+
+  const artPieceInfo = artPiecesInfo.find(
+    (pieceInfo) => pieceInfo.slug === slug
+  );
+
+  const isFavorite = artPieceInfo ? artPieceInfo.isFavorite : false;
+
+  // *************************
+
   function handleBack() {
     router.push("/art-pieces");
   }
 
   // console.log(handleToggleFavorite);
+  // korrekt!!
+
+  // console.log("auf ArtPieceDetailsPage() DATA: ", data);
   // korrekt!!
 
   return (
@@ -24,7 +41,8 @@ export default function ArtPieceDetailsPage({ data, handleToggleFavorite }) {
       year={artPiece.year}
       genre={artPiece.genre}
       onBack={handleBack}
-      handleToggleFavorite={handleToggleFavorite}
+      handleToggleFavorite={() => handleToggleFavorite(slug)}
+      isFavorite={isFavorite}
     />
   );
 }

@@ -29,6 +29,7 @@ export default function ArtPiecePreview({
           alt={`Art piece "${title}" by ${artist}`}
           width={200}
           height={200}
+          priority
         />
       </Link>
       <h3>{title}</h3>
