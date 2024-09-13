@@ -51,6 +51,7 @@ export default function ArtPieceDetailsPage({
       onSubmitComment={(comment) => onSubmitComment(slug, comment)}
       comments={comments}
       slug={slug}
+      colors={artPiece.colors}
     />
   );
 }

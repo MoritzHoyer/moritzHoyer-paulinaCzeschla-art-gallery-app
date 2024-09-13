@@ -5,13 +5,20 @@ export default function CommentForm({ onSubmitComment }) {
 
     if (comment.trim()) {
       onSubmitComment(comment);
+      event.target.reset();
+      event.target.elements.comment.focus();
     }
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="comment">Add Comment</label>
-      <input id="comment" type="text" name="comment" />
+      <input
+        id="comment"
+        type="text"
+        name="comment"
+        placeholder=" Type here ..."
+      />
       <button type="submit">Send</button>
     </form>
   );
