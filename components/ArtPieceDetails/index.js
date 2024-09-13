@@ -1,5 +1,7 @@
 import Image from "next/image";
 import FavoriteButton from "../FavoriteButton";
+import Comments from "../Comments";
+import CommentForm from "../CommentForm";
 
 export default function ArtPieceDetails({
   image,
@@ -10,12 +12,22 @@ export default function ArtPieceDetails({
   onBack,
   isFavorite,
   handleToggleFavorite,
+  comments,
+  onSubmitComment,
+  slug,
 }) {
   // console.log(handleToggleFavorite);
   // korrekt!!
 
   // console.log("auf ArtPieceDetails() DATA: ", image);
   // korrekt!!
+
+  // console.log("COMMENTS!qqq", comments);
+  // korrekt!
+
+  // console.log("auf ArtPieceDetails() FUNKTION:", onSubmitComment);
+  // korrekt!
+  const foundComments = comments.filter((comment) => comment.slug === slug);
 
   return (
     <>
@@ -36,6 +48,9 @@ export default function ArtPieceDetails({
       <p>by {artist}</p>
       <p>Year: {year}</p>
       <p>Genre: {genre}</p>
+
+      <Comments comments={foundComments} />
+      <CommentForm onSubmitComment={onSubmitComment} />
     </>
   );
 }

@@ -9,7 +9,7 @@ export default function FavoriteButton({ isFavorite, handleToggleFavorite }) {
   // console.log(handleToggleFavorite);
   // UNDEFINED! (gewesen)
 
-  console.log("YOOOOOOOOO");
+  // console.log("YOOOOOOOOO");
 
   return (
     <button type="button" onClick={handleToggleFavorite}>
