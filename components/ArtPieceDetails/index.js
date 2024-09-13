@@ -9,14 +9,20 @@ export default function ArtPieceDetails({
   genre,
   onBack,
   isFavorite,
-  onToggleFavorite,
+  handleToggleFavorite,
 }) {
+  // console.log(handleToggleFavorite);
+  // korrekt!!
+
+  // console.log("auf ArtPieceDetails() DATA: ", image);
+  // korrekt!!
+
   return (
     <>
       <button onClick={onBack}>Back</button>
       <FavoriteButton
         isFavorite={isFavorite}
-        onToggleFavorite={onToggleFavorite}
+        handleToggleFavorite={handleToggleFavorite}
       />
       <Image
         src={image}
@@ -26,8 +32,8 @@ export default function ArtPieceDetails({
         priority
       />
 
-      <h2>{title}</h2>
-      <p>{artist}</p>
+      <h3>{title}</h3>
+      <p>by {artist}</p>
       <p>Year: {year}</p>
       <p>Genre: {genre}</p>
     </>

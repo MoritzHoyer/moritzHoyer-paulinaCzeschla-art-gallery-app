@@ -3,63 +3,68 @@ import GlobalStyle from "../styles";
 import Layout from "/components/Layout";
 import { useImmer } from "use-immer";
 
-// Definiere eine fetcher-Funktion, die die API aufruft, um die Daten zu laden.
-// Die fetcher-Funktion wird an useSWR übergeben, um den Abruf zu verwalten.
+// *********************************************************************
+
 const fetcher = async (url) => {
-  const response = await fetch(url); // Hole die Daten von der angegebenen URL.
+  const response = await fetch(url);
 
-  // Prüfe, ob die Antwort erfolgreich war (Statuscode 200-299).
-  // Wenn nicht, werfe einen Fehler und hänge zusätzliche Informationen an.
   if (!response.ok) {
-    const error = new Error("An error occurred while fetching the data."); // Definiere eine Fehlernachricht.
+    const error = new Error("An error occurred while fetching the data.");
 
-    // Füge weitere Informationen zum Fehler hinzu, um das Debugging zu erleichtern.
     error.info = await response.json();
     error.status = response.status;
 
-    // Werfe den Fehler, um ihn später zu behandeln.
     throw error;
   }
 
-  // Wenn die Antwort erfolgreich war, gib die JSON-Daten zurück.
   return response.json();
 };
 
+// *********************************************************************
+
 export default function App({ Component, pageProps }) {
-  // Verwende useSWR, um Daten von der API zu holen. Es wird der fetcher-Funktion zur Datenerfassung benutzt.
   const { data, error } = useSWR(
-    `https://example-apis.vercel.app/api/art`, // URL der API.
-    fetcher // fetcher-Funktion, die wir zuvor definiert haben.
+    `https://example-apis.vercel.app/api/art`,
+    fetcher
   );
 
   const [artPiecesInfo, updateArtPiecesInfo] = useImmer([]);
 
   function handleToggleFavorite(slug) {
+    console.log("fav button clicked");
+
+    if (!slug) return;
+
     updateArtPiecesInfo((draft) => {
-      const currentArtPiece = draft.find((piece) => piece.slug === slug);
-      if (currentArtPiece) {
-        currentArtPiece.isFavorite = !currentArtPiece.isFavorite;
+      const pieceInfo = draft.find((pieceInfo) => pieceInfo.slug === slug);
+
+      if (pieceInfo) {
+        pieceInfo.isFavorite = !pieceInfo.isFavorite;
       } else {
         draft.push({ slug, isFavorite: true });
       }
     });
   }
 
-  // Wenn ein Fehler auftritt, gib eine Fehlermeldung auf der Seite aus.
   if (error) return <h1>{error.message}</h1>;
 
-  // Solange die Daten nicht geladen sind, zeige eine Ladeanzeige an.
   if (!data) return <h1>Loading ...</h1>;
+
+  // console.log(handleToggleFavorite);
+  // korrekt!
+
+  // console.log("auf App() DATA:, ", data);
+  // korrekt!
+
   return (
     <>
       <GlobalStyle />
-      {/* Layout-Komponente umschließt den Hauptinhalt */}
       <Layout>
         <Component
           {...pageProps}
           data={data}
           artPiecesInfo={artPiecesInfo}
-          onToggleFavorite={handleToggleFavorite}
+          handleToggleFavorite={handleToggleFavorite}
         />
       </Layout>
     </>
