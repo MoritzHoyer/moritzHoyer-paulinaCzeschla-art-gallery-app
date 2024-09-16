@@ -13,7 +13,6 @@ export default function FavoritesPage({
 
   return (
     <Container>
-      <h2>Favorites</h2>
       {favoritePieces.length ? (
         <ArtPieces
           pieces={favoritePieces}

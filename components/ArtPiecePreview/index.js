@@ -10,39 +10,34 @@ export default function ArtPiecePreview({
   title,
   isFavorite,
   handleToggleFavorite,
-  dimensions,
 }) {
-  const aspectRatio = dimensions.height / dimensions.width;
-
   return (
     <ArtPieceWrapper>
       <Link href={`/art-pieces/${slug}`}>
-        <ContainerImage aspectRatio={aspectRatio}>
+        <ImageContainer>
           <StyledImage
             src={image}
             alt={`Art piece "${title}" by ${artist}`}
-            // width={100}
-            // height={100}
-            layout="fill" // Bild soll den ganzen Container ausfüllen
-            objectFit="cover" // Cover sorgt dafür, dass das Bild das Seitenverhältnis beibehält
+            layout="fill"
+            objectFit="cover"
             priority
           />
-        </ContainerImage>
+        </ImageContainer>
       </Link>
 
-      <ContainerDetails>
-        <ContainerText>
+      <DetailsContainer>
+        <TextContainer>
           <StyledTitle>{title}</StyledTitle>
-          <p>by {artist}</p>
-        </ContainerText>
+          <Artist>by {artist}</Artist>
+        </TextContainer>
 
-        <ContainerButton>
+        <ButtonContainer>
           <FavoriteButton
             isFavorite={isFavorite}
             handleToggleFavorite={() => handleToggleFavorite(slug)}
           />
-        </ContainerButton>
-      </ContainerDetails>
+        </ButtonContainer>
+      </DetailsContainer>
     </ArtPieceWrapper>
   );
 }
@@ -51,14 +46,13 @@ const ArtPieceWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 10px 0;
+  padding: 10px;
 `;
 
-const ContainerImage = styled.div`
+const ImageContainer = styled.div`
   position: relative;
   width: 100%;
-  padding-top: ${({ aspectRatio }) =>
-    aspectRatio * 100}%; // Dynamisches Seitenverhältnis
+  padding-top: 100%;
   overflow: hidden;
 `;
 
@@ -68,18 +62,18 @@ const StyledImage = styled(Image)`
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; // Bild wird das Seitenverhältnis beibehalten
+  object-fit: cover;
 `;
 
-const ContainerDetails = styled.div`
+const DetailsContainer = styled.div`
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
-  align-items: center;
   width: 100%;
   padding: 10px 0;
 `;
 
-const ContainerText = styled.div`
+const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -89,11 +83,13 @@ const StyledTitle = styled.h3`
   font-size: 16px;
   font-weight: bold;
   margin: 0;
-  padding: 0;
 `;
 
-const ContainerButton = styled.div`
+const Artist = styled.p`
+  margin: 0;
+`;
+
+const ButtonContainer = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  align-items: flex-start;
 `;

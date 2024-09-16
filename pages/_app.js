@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import GlobalStyle from "../styles";
+import GlobalStyle from "../styles/GlobalStyle";
 import Layout from "/components/Layout";
 import { format } from "date-fns";
 import { useImmerLocalStorageState } from "../lib/hook/useImmerLocalStorageState";
@@ -83,7 +83,6 @@ export default function App({ Component, pageProps }) {
     <>
       <GlobalStyle />
       <Layout>
-        <h1>Art Gallery</h1>
         <Component
           {...pageProps}
           data={data}
