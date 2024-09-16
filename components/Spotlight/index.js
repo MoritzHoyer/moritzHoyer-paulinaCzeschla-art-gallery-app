@@ -18,11 +18,8 @@ export default function Spotlight({
   artPiecesInfo,
   handleToggleFavorite,
 }) {
-  // state, der das random piece speichert
   const [spotlightPiece, setSpotlightPiece] = useState();
 
-  // getRandomPiece whält aus "pieces" ein random piece aus & speichert es im state "spotlightPiece"
-  // useEffect macht, dass ein random piece ausgewählt wird, sobald die Daten in pieces geladen oder aktualisiert werden
   useEffect(() => {
     if (pieces && pieces.length > 0) {
       setSpotlightPiece(getRandomPiece(pieces));
@@ -37,77 +34,67 @@ export default function Spotlight({
 
   return (
     <SpotlightWrapper>
-      <SpotlightTitle>Spotlight</SpotlightTitle>
-
-      <SpotlightImageContainer>
+      <ImageContainer>
         <Image
           src={spotlightPiece.imageSource}
           alt={`Art piece "${spotlightPiece.name}" by ${spotlightPiece.artist}`}
-          width={500}
-          height={500}
+          layout="fill"
+          objectFit="cover"
           priority
         />
-      </SpotlightImageContainer>
+      </ImageContainer>
 
-      <SpotlightDetailsContainer>
-        <SpotlightArtist>{spotlightPiece.artist}</SpotlightArtist>
+      <DetailsContainer>
+        <Artist>{spotlightPiece.artist}</Artist>
 
-        <FavoriteButtonContainer>
+        <ButtonContainer>
           <FavoriteButton
             isFavorite={isFavorite}
             handleToggleFavorite={() =>
               handleToggleFavorite(spotlightPiece.slug)
             }
           />
-        </FavoriteButtonContainer>
-      </SpotlightDetailsContainer>
+        </ButtonContainer>
+      </DetailsContainer>
     </SpotlightWrapper>
   );
 }
-
-// const Container = styled.div`
-//   display: flex;
-// `;
 
 const SpotlightWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  gap: 20px; // Abstand zwischen den Elementen
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  padding: 10px;
+  box-sizing: border-box;
 `;
 
-const SpotlightTitle = styled.h1`
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 20px;
+const ImageContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 70%;
+  max-height: 70vh;
 `;
 
-const SpotlightImageContainer = styled.div`
-  width: 300px;
-  height: 300px;
-  background-color: #e0e0e0; // Platzhalter für das Bild
+const DetailsContainer = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const SpotlightDetailsContainer = styled.div`
-  display: flex;
+  align-items: flex-start;
   justify-content: space-between;
-  width: 300px;
-  align-items: center;
-  margin-top: 10px;
+  width: 100%;
+  padding: 10px 0;
 `;
 
-const SpotlightArtist = styled.p`
-  font-size: 16px;
+const Artist = styled.p`
+  font-size: 1.2rem;
   font-weight: bold;
-  margin: 0;
+  color: #333;
+  padding: 5px;
+  border-radius: 5px;
 `;
 
-const FavoriteButtonContainer = styled.div`
+const ButtonContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 `;

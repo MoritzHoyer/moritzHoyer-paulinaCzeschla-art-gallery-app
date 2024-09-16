@@ -3,7 +3,7 @@ import ArtPiecePreview from "../ArtPiecePreview";
 
 export default function ArtPieces({ pieces, handleToggleFavorite }) {
   return (
-    <StyledList>
+    <GridContainer>
       {pieces.map((piece) => (
         <li key={piece.slug}>
           <ArtPiecePreview
@@ -17,13 +17,22 @@ export default function ArtPieces({ pieces, handleToggleFavorite }) {
           />
         </li>
       ))}
-    </StyledList>
+    </GridContainer>
   );
 }
 
-const StyledList = styled.ul`
-  display: flex;
-  flex-direction: column;
+const GridContainer = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 20px;
   list-style: none;
   padding: 0;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
