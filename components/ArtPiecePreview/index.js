@@ -54,6 +54,7 @@ const ImageContainer = styled.div`
   width: 100%;
   padding-top: 100%;
   overflow: hidden;
+  cursor: pointer; /* Show pointer cursor to indicate clickability */
 `;
 
 const StyledImage = styled(Image)`
@@ -63,6 +64,11 @@ const StyledImage = styled(Image)`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease; /* Smooth zoom effect */
+
+  &:hover {
+    transform: scale(1.1); /* Zoom effect on hover */
+  }
 `;
 
 const DetailsContainer = styled.div`

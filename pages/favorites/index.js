@@ -5,6 +5,7 @@ export default function FavoritesPage({
   artPiecesInfo,
   handleToggleFavorite,
   data,
+  isFavorite,
 }) {
   // aus "data" Favoriten filtern (mit "slug" finden)
   const favoritePieces = data.filter(({ slug }) =>
@@ -17,6 +18,7 @@ export default function FavoritesPage({
         <ArtPieces
           pieces={favoritePieces}
           handleToggleFavorite={handleToggleFavorite}
+          isFavorite={isFavorite}
         />
       ) : (
         <h3>No Favorite Art Pieces selected</h3>
