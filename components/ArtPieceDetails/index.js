@@ -54,12 +54,12 @@ export default function ArtPieceDetails({
           ))}
         </ColorPalette>
       </ImageContainer>
-      <Details>
+      <DetailsContainer>
         <Title>{title}</Title>
         <Artist>by {artist}</Artist>
         <Year>Year: {year}</Year>
         <Genre>Genre: {genre}</Genre>
-      </Details>
+      </DetailsContainer>
       <Comments comments={foundComments} />
       <CommentForm onSubmitComment={onSubmitComment} />
     </Container>
@@ -115,7 +115,7 @@ const Colors = styled.div`
   margin: 0 5px;
 `;
 
-const Details = styled.div`
+const DetailsContainer = styled.div`
   text-align: center;
   margin-bottom: 20px;
 `;
